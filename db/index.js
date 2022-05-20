@@ -5,8 +5,12 @@ class DB {
     }
     getAllEmployees(){
         return this.connection.promise().query(
-            'SELECT id,first_name, last_name FROM employee WHERE id !=?'
+            'SELECT employee.id, employee.first_name, employee.last_name FROM employee;'
         )
     }
+    createEmployee(employee){
+        return this.connection.promise().query("INSERT INTO employee SET ?", employee)
+    }
+    
 }
 module.exports = new DB(connection);

@@ -10,7 +10,7 @@ const connection = mysql.createConnection(
         password: process.env.DB_PASS,
         database: process.env.DB_NAME
       },
-      console.log('Connected to the election database.')
+      console.log('Connected to employees')
     );
   
   module.exports = connection;
