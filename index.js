@@ -17,11 +17,17 @@ const initQuestion = () => {
             case "ALL_EMPLOYEES":
                 viewEmployees()
                 break;
-            case "Add Role":
-                addRole()
+            case "Add Department":
+                addDept()
                 break;
             case "Add Employee":
                 addEmployee()
+                break;
+            case "Add Role":
+                addRole()
+                break;
+            case "Update Employee":
+                updateEmployee()
                 break;
             default:
                 break;
@@ -62,14 +68,18 @@ const addDept = () => {
 
         {        
             type: "list",
-            name: "department",
+            name: "dept_name",
             message: "What is the name of the department?",
             choices: ['Customer Service', 'Engineering', 'Sales', 'Finance', 'Legal']
         },
     ])
-    .then(deptAnswers => {
-    
+    .then((deptData)=>{
+        const {dept_name} = deptData
+        const newDept = {dept_name}
+        console.log(newDept)
+        db.createDept()
     })
+    .then(()=>{initQuestion})
 }
 
 
@@ -113,29 +123,36 @@ const addRole = () => {
     inquirer.prompt ([
         {
             type: "input",
-            name: "rolename",
+            name: "role_name",
             message: "What is the name of the role?",
         },
         {
             type: "input",
-            name: "rolesalary",
+            name: "role_salary",
             message: "What is the salary of the role?",
         },
         {
             type: "input",
-            name: "roledept",
+            name: "role_dept",
             message: "What department does the role belong to?",
         }
     ])
-}
+    .then((roleData)=>{
+        const {role_name, role_salary, roles_dept} = roleData
+        const newRole = {role_name, role_salary, roles_dept}
+         console.log(newRole)
+         db.addRole(newRole)
+     })
+     .then(()=>{initQuestion})
+ }
 
 const updateEmployee = () => {
     inquirer.prompt ([
         {
             type: "list",
-            name: "employeelist",
+            name: "update_employee",
             message: "Which employee's role do you want to update?",
-            choices: [empArray]
+            choices: [employees]
         }
     ])
 }
