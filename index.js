@@ -150,12 +150,24 @@ const updateEmployee = () => {
     inquirer.prompt ([
         {
             type: "list",
-            name: "update_employee",
+            name: "employee_list",
             message: "Which employee's role do you want to update?",
-            choices: [employees]
+            choices: [{viewEmployees}]
+        },
+        {
+            type: "input",
+            name: "update_employee",
+            message: "What role would you like to assign to the employee?"
         }
     ])
+    .then((updateData)=>{
+        const {employee_list, update_employee} = updateData
+        const updatedEmployee = {employee_list, update_employee}
+        console.log(updatedEmployee)
+        db.updateRole(updatedEmployee)
+    })
+    .then(()=>{initQuestion()})
 }
-initQuestion()
+
 
 
