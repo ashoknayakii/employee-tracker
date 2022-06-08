@@ -1,5 +1,4 @@
-
-    # Employee Tracker
+# Employee Tracker
 
 ## Description
 Employee Tracker is a command line based application giving a company access to a database of all their employees.

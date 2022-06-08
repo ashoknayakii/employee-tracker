@@ -1,7 +1,7 @@
 
 CREATE TABLE department (
   id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
-  name VARCHAR(30) UNIQUE NOT NULL
+  name VARCHAR(30) NOT NULL
 );
 
 CREATE TABLE roles (
@@ -30,7 +30,7 @@ CREATE TABLE roles (
 
 
 
-    -- ('Steven', 'Smith', 2),
+  
     -- ('Peter', 'Farnsworth', 4),
     -- ('Stacey', 'McWalter', 3, 3),
     -- ('Taylor', 'Finch', 4),
