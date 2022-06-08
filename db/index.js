@@ -19,29 +19,43 @@ class DB {
   }
 
   createEmployee(employee) {
-    return this.connection.promise().execute("INSERT INTO employee (first_name, last_name, roles_id, manager_id) VALUES (?, ?, ?, ?)", employee);
+    return this.connection
+      .promise()
+      .execute(
+        "INSERT INTO employee (first_name, last_name, roles_id, manager_id) VALUES (?, ?, ?, ?)",
+        employee
+      );
   }
 
-      createDept() {
-          return this.connection.promise().query(`INSERT INTO department (department.name) VALUES (?);`, answers.dept_name,
-          (err, results, fields) => {
-              if (err) {
-                  console.log(`Error adding ${newDept} to the database.`
-                  );
-              } else {
-                  console.log(`${newDept} was added successfully to the database!`)
-              }
-          })
-      }
+  createDept(department) {
+    return this.connection
+      .promise()
+      .execute(
+        "INSERT INTO department (name) VALUES (?)",
+        department
+      );
+  }
 
-  //     addRole(roles){ //         return this.connection.promise().query("
-  //     }
+  createRole(roles) {
+      return this.connection
+      .promise()
+      .execute(
+          "INSERT INTO roles (title, salary, department_id) VALUES (?, ?, ?)", roles
+      );
+  }
 
-  //     updateRole(employee){
-  //         return this.connection.promise().query("UPDATE employee SET ? WHERE ?", employee)
-  //     }
 }
 
 module.exports = new DB(connection);
 
 // 'SELECT employee.id, employee.first_name, employee.last_name FROM employee;'
+
+
+// (err, results, fields) => {
+//     if (err) {
+//         console.log(`Error adding ${newDept} to the database.`
+//         );
+//     } else {
+//         console.log(`${newDept} was added successfully to the database!`)
+//     }
+// })

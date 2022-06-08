@@ -173,7 +173,7 @@ const addRole = () => {
     ])
     .then((roleData) => {
       const { role_name, role_salary, roles_dept } = roleData;
-      const newRole = { role_name, role_salary, roles_dept };
+      const newRole = [role_name, role_salary, roles_dept]
       console.log(newRole);
       db.addRole(newRole);
     })
@@ -199,7 +199,7 @@ const updateEmployee = () => {
     ])
     .then((updateData) => {
       const { employee_list, update_employee } = updateData;
-      const updatedEmployee = { employee_list, update_employee };
+      const updatedEmployee = [ employee_list, update_employee ];
       console.log(updatedEmployee);
       db.updateRole(updatedEmployee);
     })
