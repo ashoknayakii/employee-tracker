@@ -89,17 +89,10 @@ const addDept = () => {
   inquirer
     .prompt([
       {
-        type: "list",
+        type: "input",
         name: "dept_name",
         message: "What is the name of the department?",
-        choices: [
-          "Customer Service",
-          "Engineering",
-          "Sales",
-          "Finance",
-          "Legal",
-        ],
-      },
+      }
     ])
     .then((deptData) => {
       const { dept_name } = deptData;
@@ -175,7 +168,7 @@ const addRole = () => {
       const { role_name, role_salary, roles_dept } = roleData;
       const newRole = [role_name, role_salary, roles_dept]
       console.log(newRole);
-      db.addRole(newRole);
+      db.createRole(newRole);
     })
     .then(() => {
       initQuestion;
