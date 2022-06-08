@@ -9,6 +9,7 @@ CREATE TABLE roles (
   title VARCHAR(30) NOT NULL,
   salary DECIMAL UNSIGNED NOT NULL, 
   department_id INT UNSIGNED NOT NULL,
+  INDEX dept_ind(department_id),
   CONSTRAINT fk_department FOREIGN KEY (department_id) REFERENCES department(id) ON DELETE CASCADE
 );
 
@@ -17,19 +18,17 @@ CREATE TABLE roles (
   first_name VARCHAR(30) NOT NULL,
   last_name VARCHAR(30) NOT NULL,
   roles_id INT UNSIGNED NOT NULL,
-  CONSTRAINT fk_roles FOREIGN KEY (roles_id) REFERENCES roles(id), 
-  manager_id INT UNSIGNED ,
+  INDEX roles_ind(roles_id),
+  CONSTRAINT fk_roles FOREIGN KEY (roles_id) REFERENCES roles(id) ON DELETE CASCADE,
+  manager_id INT UNSIGNED,
+  INDEX man_ind(manager_id),
   CONSTRAINT fk_manager FOREIGN KEY (manager_id) REFERENCES employee(id) ON DELETE SET NULL
 
 );
 
--- INDEX roles_ind(roles_id),
 
--- INDEX dept_ind(department_id),
 
--- INDEX man_ind(manager_id),
 
--- ON DELETE CASCADE,
 
     -- ('Steven', 'Smith', 2),
     -- ('Peter', 'Farnsworth', 4),
