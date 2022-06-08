@@ -2,7 +2,9 @@ const inquirer = require('inquirer');
 const fs = require('fs');
 const path = require('path');
 require('console.table');
-const db = require('./db')
+const db = require('./db');
+// const { viewDepartments } = require('./db');
+
 
 const initQuestion = () => {
     inquirer.prompt([
@@ -10,11 +12,20 @@ const initQuestion = () => {
             type: "list",
             name: "initial",
             message: "What would you like to do?",
-            choices: [{name: 'View all Employees', value: 'ALL_EMPLOYEES'},'Add Department', 'Add Employee', 'Add Role', 'Update Employee Role']
+            choices: ['View all Tables', 'View all Departments', 'View all Roles', 'View all Employees', 'Add Department', 'Add Employee', 'Add Role', 'Update Employee Role', 'Exit']
         }
     ]).then(answer => {
         switch (answer.initial) {
-            case "ALL_EMPLOYEES":
+            case "View all Tables":
+                viewAll()
+                break;
+            case "View all Departments":
+                viewDepartments()
+                break;
+            case "View all Roles":
+                viewRoles()
+                break;
+            case "View all Employees":
                 viewEmployees()
                 break;
             case "Add Department":
@@ -29,43 +40,44 @@ const initQuestion = () => {
             case "Update Employee":
                 updateEmployee()
                 break;
-            default:
+            case "Exit":
+                exitTracker()
+            default: 
                 break;
         }
-        // if (answer.role === "Add Role") {
-        //     addRole();
-        // }
-        // else if (answer.role === "Add Department") {
-        //     addDept();
-        // }
-        // else if (answer.role === "Add Employee") {
-        //     addEmployee();
-        // }
-        // else if (answer.role === "Update Employee Role") {
-        //     addSalary();
-        // }
-        // else if (answer.role === "Add Manager") {
-        //     addManager();
-        // }
-        // else {
-        //     console.log("Finished with Employee Tracker")
-        // }
     })
 };
 
-const viewEmployees = ()=>{
+initQuestion();
+
+const viewEmployees = ()=> {
  db.
  getAllEmployees()
- .then(([employees])=>{
-console.log(employees)
-//  console.table(employees)
+ .then(([employees])=> {
+console.table(employees)
 })
 .then(()=>initQuestion())
 }
 
+const viewDepartments = ()=> {
+    db.getAllDepartments()
+    .then(([departments])=> {
+        console.table(departments)
+    })
+    .then(()=>initQuestion())
+}
+
+const viewRoles = ()=> {
+    db.getAllRoles()
+    .then(([roles]) =>{
+        console.table(roles)
+    })
+    .then(()=>initQuestion())
+}
+
+
 const addDept = () => {
     inquirer.prompt ([
-
         {        
             type: "list",
             name: "dept_name",
@@ -81,7 +93,6 @@ const addDept = () => {
     })
     .then(()=>{initQuestion})
 }
-
 
 const addEmployee = () => {
     inquirer.prompt ([
@@ -106,6 +117,7 @@ const addEmployee = () => {
             message: "Who is the employee's manager id?",
         },
     ])
+
     .then((employeeData)=>{
        const {first_name, last_name, roles_id, manager_id} = employeeData
        if(!manager_id || ''){
@@ -168,6 +180,26 @@ const updateEmployee = () => {
     })
     .then(()=>{initQuestion()})
 }
+
+const exitTracker = () => {
+    inquirer.prompt ([
+        {
+            type: "input",
+            name: "exit_confirm",
+            message: "Would you like to do anything else?"
+        }
+    ])
+    .then((answer) => {
+        if (answer.true) {
+        return initQuestion();
+    } else {
+        process.exit();
+    }
+}
+    )};
+
+
+
 
 
 
