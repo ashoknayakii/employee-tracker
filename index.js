@@ -53,7 +53,7 @@ const initQuestion = () => {
           break;
         case "Exit":
           exitTracker();
-        default:
+        default: 
           break;
       }
     });
@@ -61,18 +61,11 @@ const initQuestion = () => {
 
 initQuestion();
 
-const viewEmployees = () => {
-  db.getAllEmployees()
-    .then(([employees]) => {
-      console.table(employees);
-    })
-    .then(() => initQuestion());
-};
 
 const viewDepartments = () => {
   db.getAllDepartments()
-    .then(([departments]) => {
-      console.table(departments);
+    .then(([department]) => {
+      console.table(department);
     })
     .then(() => initQuestion());
 };
@@ -85,6 +78,23 @@ const viewRoles = () => {
     .then(() => initQuestion());
 };
 
+const viewEmployees = () => {
+  db.getAllEmployees()
+    .then(([employees]) => {
+      console.table(employees);
+    })
+    .then(() => initQuestion());
+};
+
+const viewAll=() =>{
+  db.getAllTables()
+  .then(([employees])=> {
+    console.table(employees);
+  })
+  .then(() => initQuestion());
+};
+
+
 const addDept = () => {
   inquirer
     .prompt([
@@ -96,8 +106,8 @@ const addDept = () => {
     ])
     .then((deptData) => {
       const { dept_name } = deptData;
-      const newDept = { dept_name };
-      console.log(newDept);
+      const newDept = [ dept_name ];
+      console.table(newDept);
       db.createDept();
     })
     .then(() => {

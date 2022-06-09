@@ -1,9 +1,14 @@
 const connection = require("./connection.js");
-const inquirerdata = require("../index");
+const mysql = require('mysql2');
+
 
 class DB {
   constructor(connection) {
     this.connection = connection;
+  }
+
+  getAllTables() {
+    return this.connection.promise().query("SELECT * from EMPLOYEE RIGHT JOIN department ON roles.department_id = department.id LEFT JOIN roles ON employee.roles_id = roles.id;")
   }
 
   getAllDepartments() {
@@ -31,7 +36,7 @@ class DB {
     return this.connection
       .promise()
       .execute(
-        "INSERT INTO department (name) VALUES (?)",
+        `INSERT INTO department (name) VALUES (?);`,
         department
       );
   }
