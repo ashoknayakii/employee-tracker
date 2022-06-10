@@ -7,9 +7,9 @@ class DB {
     this.connection = connection;
   }
 
-  getAllTables() {
-    return this.connection.promise().query("SELECT * from EMPLOYEE RIGHT JOIN department ON roles.department_id = department.id LEFT JOIN roles ON employee.roles_id = roles.id;")
-  }
+  // getAllTables() {
+  //   return this.connection.promise().query("SELECT * from EMPLOYEE RIGHT JOIN department ON roles.department_id = department.id LEFT JOIN roles ON employee.roles_id = roles.id;")
+  // }
 
   getAllDepartments() {
     return this.connection.promise().query("SELECT * from DEPARTMENT;");
@@ -36,16 +36,17 @@ class DB {
     return this.connection
       .promise()
       .execute(
-        `INSERT INTO department (name) VALUES (?);`,
-        department
+        'INSERT INTO department (name) VALUES (?)',
+        department,
       );
+
   }
 
   createRole(roles) {
       return this.connection
       .promise()
       .execute(
-          "INSERT INTO roles (title, salary, department_id) VALUES (?, ?, ?)", roles
+          "INSERT INTO `roles` (title, salary, department_id) VALUES (?, ?, ?)", roles
       );
   }
 

@@ -16,11 +16,9 @@ Employee Tracker is a command line based application giving a company access to 
 * Type command "node app" to begin the prompt from inquirer 
 * Answer all questions from the prompt and view the results after logging into MYSQL shell.
 
-## Screenshot
-
-![Screenshot]()
-
 ## Demo
+
+<https://drive.google.com/file/d/1gD1vTwfOnLZnX7BSBXgcWNnJ0DRxy5hl/view>
 
 
 ### URL of the GitHub repository:
